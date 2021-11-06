@@ -60,3 +60,9 @@ function Primes() {
 }
 
 const { getPrimesTill, getFirstPrimes } = Primes()
+
+try {
+  module.exports = { getFirstPrimes, getPrimesTill }
+} catch (e) {
+  console.log('in browser')
+}

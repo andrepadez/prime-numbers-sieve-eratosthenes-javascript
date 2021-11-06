@@ -1,0 +1,35 @@
+{
+  "name": "primes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "André Padez <andre.padez@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "jest-html-reporter": "^3.4.1",
+    "jest-junit": "^13.0.0"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          "pageTitle": "Primes Sieve",
+          "outputPath": "primes-tests.html",
+          "includeFailureMsg": true,
+          "includeConsoleLog": true
+        }
+      ]
+    ]
+  },
+  "jest-junit": {
+    "suiteNameTemplate": "{filepath}",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}"
+  }
+}
