@@ -21,6 +21,17 @@ describe('Testing getPrimesTill', () => {
     const result = getPrimesTill(1000)
     expect(result).toEqual(primesTo1000)
   })
+
+  test('primes till 10000', () => {
+    const result = getPrimesTill(10000)
+    expect(result.length).toEqual(1229)
+  })
+
+  test('very large numbers... (75.000)', () => {
+    const result = getPrimesTill(75000)
+    console.log('primes till 75.000', result.length)
+    console.log('last prime till 75.000', result[result.length - 1])
+  })
 })
 
 const primesTo10 = [2, 3, 5, 7]

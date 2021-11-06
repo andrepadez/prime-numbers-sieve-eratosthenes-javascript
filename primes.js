@@ -13,19 +13,19 @@ function Primes() {
 
   const fillPrimes = primes => {
     const diff = primes.length - thePrimes.length
-    console.log('fillPrimes?', primes.length, thePrimes.length, diff)
+    // console.log('fillPrimes?', primes.length, thePrimes.length, diff)
     if (diff > 0) {
-      console.log('diff > 0', diff, primes.length)
+      // console.log('diff > 0', diff, primes.length)
       for (let i = primes.length - diff; i < primes.length; i++) {
         thePrimes.push(primes[i])
         thePrimePositions.add(primes[i])
       }
     }
-    console.log('finished fillPrimes', thePrimes.length, thePrimePositions)
+    // console.log('finished fillPrimes', thePrimes.length, thePrimePositions)
   }
 
   const shortCircuitPrimes = until => {
-    console.log('short circuiting')
+    // console.log('short circuiting')
     const primesUntil = []
     for (let i = 0; ; i++) {
       if (thePrimes[i] > until) {
@@ -39,7 +39,7 @@ function Primes() {
     getPrimesTill: n => {
       const tpl = thePrimes.length
       const lastPrime = thePrimes[tpl - 1]
-      console.log(lastPrime, n, lastPrime > n)
+      // console.log(lastPrime, n, lastPrime > n)
       if (lastPrime > n) {
         return shortCircuitPrimes(n)
       }
@@ -47,7 +47,7 @@ function Primes() {
         ...thePrimes,
         ...new Array(n - lastPrime).fill(null).map((x, i) => i + 1 + tpl),
       ]
-      console.log({ list })
+      // console.log({ list })
       const primes = sieve(list)
       setTimeout(() => fillPrimes(primes), 0)
       return primes
