@@ -27,10 +27,16 @@ describe('Testing getPrimesTill', () => {
     expect(result.length).toEqual(1229)
   })
 
-  test('very large numbers... (75.000)', () => {
-    const result = getPrimesTill(75000)
-    console.log('primes till 75.000', result.length)
-    console.log('last prime till 75.000', result[result.length - 1])
+  describe.skip('Very Large Numbers', () => {
+    test('very large numbers... (100.000)', () => {
+      const result = getPrimesTill(100000)
+    })
+    test('very large numbers... (500.000)', () => {
+      const result = getPrimesTill(500000)
+    })
+    test('very large numbers... (1.000.000)', () => {
+      const result = getPrimesTill(1000000)
+    })
   })
 })
 

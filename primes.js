@@ -1,15 +1,8 @@
 // const assert = require('assert')
 
 function Primes() {
-  let thePrimes = [2]
+  let thePrimes = []
   let thePrimePositions = new Set(thePrimes)
-
-  const sieve = list => {
-    if (list.length === 0) return []
-    const first = list.shift()
-    const filtered = list.filter(x => x % first !== 0)
-    return [first, ...sieve(filtered)]
-  }
 
   const fillPrimes = primes => {
     const diff = primes.length - thePrimes.length
@@ -35,20 +28,48 @@ function Primes() {
     }
   }
 
+  const sieve = list => {
+    if (list.length === 0) return []
+    const first = list.shift()
+    const filtered = list.filter(x => x % first !== 0)
+    return [first, ...sieve(filtered)]
+  }
+
+  const removeFirstPrimes = list => {
+    const lastPrime = thePrimes[thePrimes.length - 1]
+  }
+
+  const sieveLoop = list => {
+    let copy = [...list]
+    const result = []
+    for (let i = 0; ; i++) {
+      const first = copy.shift()
+      if (!first) return result
+      result.push(first)
+      copy = copy.filter(x => x % first !== 0)
+      // console.log({ i })
+      // console.log('result', result)
+      // console.log('copy', copy)
+      // console.log('------------')
+    }
+    return result
+  }
+
   return {
     getPrimesTill: n => {
       const tpl = thePrimes.length
       const lastPrime = thePrimes[tpl - 1]
-      // console.log(lastPrime, n, lastPrime > n)
       if (lastPrime > n) {
         return shortCircuitPrimes(n)
       }
       const list = [
         ...thePrimes,
-        ...new Array(n - lastPrime).fill(null).map((x, i) => i + 1 + tpl),
+        ...new Array(n - (lastPrime || 1))
+          .fill(null)
+          .map((x, i) => i + 2 + tpl),
       ]
       // console.log({ list })
-      const primes = sieve(list)
+      const primes = sieveLoop(list)
       setTimeout(() => fillPrimes(primes), 0)
       return primes
     },
