@@ -1,35 +1,39 @@
 const { getPrimesTill } = require('./primes')
 
 describe('Testing getPrimesTill', () => {
-  test('primes till 10', () => {
-    const result = getPrimesTill(10)
-    expect(result).toEqual(primesTo10)
-  })
-  test('primes till 20', () => {
-    const result = getPrimesTill(20)
-    expect(result).toEqual(primesTo20)
-  })
-  test('primes till 50', () => {
-    const result = getPrimesTill(50)
-    expect(result).toEqual(primesTo50)
-  })
-  test('primes till 100', () => {
-    const result = getPrimesTill(100)
-    expect(result).toEqual(primesTo100)
-  })
-  test('primes till 1000', () => {
-    const result = getPrimesTill(1000)
-    expect(result).toEqual(primesTo1000)
-  })
-
-  test('primes till 10000', () => {
-    const result = getPrimesTill(10000)
-    expect(result.length).toEqual(1229)
+  describe('small numbers', () => {
+    test('primes till 10', () => {
+      const result = getPrimesTill(10)
+      expect(result).toEqual(primesTo10)
+    })
+    test('primes till 20', () => {
+      const result = getPrimesTill(20)
+      expect(result).toEqual(primesTo20)
+    })
+    test('primes till 50', () => {
+      const result = getPrimesTill(50)
+      expect(result).toEqual(primesTo50)
+    })
+    test('primes till 100', () => {
+      const result = getPrimesTill(100)
+      expect(result).toEqual(primesTo100)
+    })
+    test('primes till 1000', () => {
+      const result = getPrimesTill(1000)
+      expect(result).toEqual(primesTo1000)
+    })
+    test('primes till 10000', () => {
+      const result = getPrimesTill(10000)
+      expect(result.length).toEqual(1229)
+    })
   })
 
   describe.skip('Very Large Numbers', () => {
     test('very large numbers... (100.000)', () => {
       const result = getPrimesTill(100000)
+    })
+    test('very large numbers... (250.000)', () => {
+      const result = getPrimesTill(250000)
     })
     test('very large numbers... (500.000)', () => {
       const result = getPrimesTill(500000)

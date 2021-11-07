@@ -1,24 +1,16 @@
-// const assert = require('assert')
-
 function Primes() {
   let thePrimes = []
   let thePrimePositions = new Set(thePrimes)
 
   const fillPrimes = primes => {
-    const diff = primes.length - thePrimes.length
-    // console.log('fillPrimes?', primes.length, thePrimes.length, diff)
-    if (diff > 0) {
-      // console.log('diff > 0', diff, primes.length)
-      for (let i = primes.length - diff; i < primes.length; i++) {
-        thePrimes.push(primes[i])
-        thePrimePositions.add(primes[i])
-      }
+    if (primes.length - thePrimes.length) {
+      thePrimes = primes
+      thePrimesPositions = new Set(thePrimes)
     }
-    // console.log('finished fillPrimes', thePrimes.length, thePrimePositions)
+    console.log('thePrimes', thePrimes)
   }
 
   const shortCircuitPrimes = until => {
-    // console.log('short circuiting')
     const primesUntil = []
     for (let i = 0; ; i++) {
       if (thePrimes[i] > until) {
@@ -35,49 +27,52 @@ function Primes() {
     return [first, ...sieve(filtered)]
   }
 
-  const removeFirstPrimes = list => {
-    const lastPrime = thePrimes[thePrimes.length - 1]
-  }
-
-  const sieveLoop = list => {
-    let copy = [...list]
+  const sieveLoop = n => {
+    const list = buildListFromLastPrime(n)
+    console.log('list', list)
     const result = []
+    let copy = [...thePrimes, ...list]
+    for (let i = 0; i < result.length; i++) {
+      copy = copy.filter(x => x % result[i] !== 0)
+    }
     for (let i = 0; ; i++) {
       const first = copy.shift()
       if (!first) return result
       result.push(first)
       copy = copy.filter(x => x % first !== 0)
-      // console.log({ i })
-      // console.log('result', result)
-      // console.log('copy', copy)
-      // console.log('------------')
     }
-    return result
   }
 
-  return {
-    getPrimesTill: n => {
-      const tpl = thePrimes.length
-      const lastPrime = thePrimes[tpl - 1]
-      if (lastPrime > n) {
-        return shortCircuitPrimes(n)
-      }
-      const list = [
-        ...thePrimes,
-        ...new Array(n - (lastPrime || 1))
-          .fill(null)
-          .map((x, i) => i + 2 + tpl),
-      ]
-      // console.log({ list })
-      const primes = sieveLoop(list)
-      setTimeout(() => fillPrimes(primes), 0)
-      return primes
-    },
-    getFirstPrimes: n => {
-      const list = new Array(n - 1).fill(null).map((x, i) => i + 2)
-      return sieve(list)
-    },
+  const buildListFromLastPrime = n => {
+    const tpl = thePrimes.length
+    const lastPrime = thePrimes[tpl - 1]
+    const len = n - (lastPrime ? tpl : 1)
+    console.log(len)
+    return new Array(len).fill(null).map((x, i) => i + 2 + tpl)
   }
+
+  const getPrimesTill = n => {
+    const tpl = thePrimes.length
+    const lastPrime = thePrimes[tpl - 1]
+    if (lastPrime > n) {
+      return shortCircuitPrimes(n)
+    }
+
+    const primes = sieveLoop(n)
+    fillPrimes(primes)
+    return primes
+  }
+
+  const getFirstPrimes = n => {
+    do {
+      if (thePrimes.length >= n) {
+        return thePrimes.slice(0, n)
+      }
+      getPrimesTill(n * n)
+    } while ((n = n * n))
+  }
+
+  return { getPrimesTill, getFirstPrimes }
 }
 
 const { getPrimesTill, getFirstPrimes } = Primes()
