@@ -1,4 +1,4 @@
-const { getPrimesTill } = require('./primes')
+const { getPrimesTill, getFirstPrimes } = require('./primes')
 
 describe('Testing getPrimesTill', () => {
   describe('small numbers', () => {
@@ -28,6 +28,23 @@ describe('Testing getPrimesTill', () => {
     })
   })
 
+  describe('getPrimesTill prime number should end on that number', () => {
+    test('getPrimesTill 461', () => {
+      const result = getPrimesTill(461)
+      expect(result[result.length - 1]).toEqual(461)
+    })
+
+    test('getPrimesTill 7919', () => {
+      const result = getPrimesTill(7919)
+      expect(result[result.length - 1]).toEqual(7919)
+    })
+
+    test('getPrimesTill 99991', () => {
+      const result = getPrimesTill(99991)
+      expect(result[result.length - 1]).toEqual(99991)
+    })
+  })
+
   describe('Very Large Numbers', () => {
     test('very large numbers... (100.000)', () => {
       const result = getPrimesTill(100000)
@@ -44,11 +61,35 @@ describe('Testing getPrimesTill', () => {
       expect(result.length).toEqual(length200k)
       expect(result[result.length - 1]).toEqual(lastPrime200k)
     })
-    test.skip('very large numbers... (500.000)', () => {
+    test('very large numbers... (500.000)', () => {
       const result = getPrimesTill(500000)
+      expect(result.length).toEqual(length500k)
+      expect(result[result.length - 1]).toEqual(lastPrime500k)
     })
-    test.skip('very large numbers... (1.000.000)', () => {
+    test('very large numbers... (1.000.000)', () => {
       const result = getPrimesTill(1000000)
+      expect(result.length).toEqual(length1M)
+      expect(result[result.length - 1]).toEqual(lastPrime1M)
+    })
+  })
+})
+
+describe('Testing getFirstPrimes', () => {
+  describe('if the primes already found', () => {
+    test('get first 1.000 primes', () => {
+      const result = getFirstPrimes(1000)
+      expect(result.length).toBe(1000)
+      expect(result[result.length - 1]).toBe(lastPrime1k)
+    })
+    test('get first 10.000 primes', () => {
+      const result = getFirstPrimes(10000)
+      expect(result.length).toBe(10000)
+      expect(result[result.length - 1]).toBe(lastPrime10k)
+    })
+    test('get first 20.000 primes', () => {
+      const result = getFirstPrimes(20000)
+      expect(result.length).toBe(20000)
+      expect(result[result.length - 1]).toBe(lastPrime20k)
     })
   })
 })
@@ -74,9 +115,16 @@ const primesTo1000 = [
   919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997,
 ]
 
+const lastPrime1k = 7919
+const lastPrime10k = 104729
+const lastPrime20k = 224737
 const lastPrime100k = 99991
 const length100k = 9592
 const lastPrime200k = 199999
 const length200k = 17984
 const lastPrime250k = 249989
 const length250k = 22044
+const lastPrime500k = 499979
+const length500k = 41538
+const lastPrime1M = 999983
+const length1M = 78498

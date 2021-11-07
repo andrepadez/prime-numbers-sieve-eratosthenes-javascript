@@ -54,21 +54,23 @@ function Primes() {
   }
 
   const getFirstPrimes = n => {
+    let count = 0
     do {
+      // console.log(count, thePrimes.length)
       if (thePrimes.length >= n) {
         return thePrimes.slice(0, n)
       }
-      getPrimesTill(n * n)
-    } while ((n = n * n))
+      getPrimesTill(n + ++count * n)
+    } while (true)
   }
 
-  return { getPrimesTill, getFirstPrimes }
+  return { getPrimesTill, getFirstPrimes, thePrimes }
 }
 
-const { getPrimesTill, getFirstPrimes } = Primes()
+const { getPrimesTill, getFirstPrimes, thePrimes } = Primes()
 
 try {
-  module.exports = { getFirstPrimes, getPrimesTill }
+  module.exports = { getFirstPrimes, getPrimesTill, thePrimes }
 } catch (e) {
   console.log('in browser')
 }
