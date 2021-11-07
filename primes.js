@@ -2,11 +2,9 @@ function Primes() {
   let thePrimes = []
   let thePrimePositions = new Set(thePrimes)
 
-  const fillPrimes = primes => {
-    if (primes.length - thePrimes.length) {
-      thePrimes = primes
-      thePrimesPositions = new Set(thePrimes)
-    }
+  const updatePrimes = primes => {
+    thePrimes = primes
+    thePrimesPositions = new Set(thePrimes)
   }
 
   const shortCircuitPrimes = until => {
@@ -49,7 +47,9 @@ function Primes() {
     }
 
     const primes = sieveLoop(n)
-    fillPrimes(primes)
+    if (primes.length - thePrimes.length) {
+      updatePrimes(primes)
+    }
     return primes
   }
 
