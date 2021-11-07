@@ -19,13 +19,6 @@ function Primes() {
     }
   }
 
-  const sieve = list => {
-    if (list.length === 0) return []
-    const first = list.shift()
-    const filtered = list.filter(x => x % first !== 0)
-    return [first, ...sieve(filtered)]
-  }
-
   const sieveLoop = n => {
     const list = buildListFromLastPrime(n)
     const result = []
