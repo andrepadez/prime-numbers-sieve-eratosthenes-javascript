@@ -28,17 +28,26 @@ describe('Testing getPrimesTill', () => {
     })
   })
 
-  describe.skip('Very Large Numbers', () => {
+  describe('Very Large Numbers', () => {
     test('very large numbers... (100.000)', () => {
       const result = getPrimesTill(100000)
+      expect(result.length).toEqual(length100k)
+      expect(result[result.length - 1]).toEqual(lastPrime100k)
     })
     test('very large numbers... (250.000)', () => {
       const result = getPrimesTill(250000)
+      expect(result.length).toEqual(length250k)
+      expect(result[result.length - 1]).toEqual(lastPrime250k)
     })
-    test('very large numbers... (500.000)', () => {
+    test('takes till 200.000 after having till 250.000', () => {
+      const result = getPrimesTill(200000)
+      expect(result.length).toEqual(length200k)
+      expect(result[result.length - 1]).toEqual(lastPrime200k)
+    })
+    test.skip('very large numbers... (500.000)', () => {
       const result = getPrimesTill(500000)
     })
-    test('very large numbers... (1.000.000)', () => {
+    test.skip('very large numbers... (1.000.000)', () => {
       const result = getPrimesTill(1000000)
     })
   })
@@ -64,3 +73,10 @@ const primesTo1000 = [
   821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911,
   919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997,
 ]
+
+const lastPrime100k = 99991
+const length100k = 9592
+const lastPrime200k = 199999
+const length200k = 17984
+const lastPrime250k = 249989
+const length250k = 22044

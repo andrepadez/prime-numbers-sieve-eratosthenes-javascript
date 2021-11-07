@@ -7,7 +7,6 @@ function Primes() {
       thePrimes = primes
       thePrimesPositions = new Set(thePrimes)
     }
-    console.log('thePrimes', thePrimes)
   }
 
   const shortCircuitPrimes = until => {
@@ -29,7 +28,6 @@ function Primes() {
 
   const sieveLoop = n => {
     const list = buildListFromLastPrime(n)
-    console.log('list', list)
     const result = []
     let copy = [...thePrimes, ...list]
     for (let i = 0; i < result.length; i++) {
@@ -46,8 +44,7 @@ function Primes() {
   const buildListFromLastPrime = n => {
     const tpl = thePrimes.length
     const lastPrime = thePrimes[tpl - 1]
-    const len = n - (lastPrime ? tpl : 1)
-    console.log(len)
+    const len = n - (lastPrime ? tpl + 1 : 1)
     return new Array(len).fill(null).map((x, i) => i + 2 + tpl)
   }
 
